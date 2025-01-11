@@ -2,7 +2,7 @@
 
 ## Overview
 
-This module provides type-checking for PySide6.QtCore.Signal.
+This module provides a type-checking signal implementation for PySide6.QtCore.Signal.
 
 When imported, it will automatically patch the Signal class to enforce type checking on signal emissions.
 
