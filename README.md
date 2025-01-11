@@ -17,7 +17,7 @@ pip install git+https://github.com/Loubrains/StrictSignal
 ## Usage
 
 ```python
-from StritSignal import Signal
+from StrictSignal import Signal
 from PySide6.QtCore import QObject
 
 class MyObject(QObject):
@@ -27,7 +27,7 @@ class MyObject(QObject):
 ## Example
 
 ```python
-from StritSignal import Signal
+from StrictSignal import Signal
 from PySide6.QtCore import QObject
 
 class MyObject(QObject):
