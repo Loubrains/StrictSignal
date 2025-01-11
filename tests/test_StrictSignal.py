@@ -1,6 +1,6 @@
 import pytest
 from PySide6.QtCore import QObject, QCoreApplication
-from src.StrictSignal import Signal
+from StrictSignal.StrictSignal import Signal
 
 
 @pytest.fixture(scope="module")
