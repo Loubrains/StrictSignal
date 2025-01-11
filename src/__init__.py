@@ -40,3 +40,5 @@ obj = MyObject()
 # TypeError: 42 is not instance of <class 'str'>
 ```
 """
+
+from .StrictSignal import Signal
