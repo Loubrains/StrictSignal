@@ -1,4 +1,4 @@
-"""This module provides a strict type-checking signal implementation for PySide6.QtCore.Signal.
+"""This module provides a type-checking signal implementation for PySide6.QtCore.Signal.
 
 When imported, it will automatically patch the Signal class to enforce type checking on signal emissions.
 
@@ -19,6 +19,9 @@ class MyObject(QObject):
 Example:
 ---
 ```python
+from StritSignal import Signal
+from PySide6.QtCore import QObject
+
 class MyObject(QObject):
     signal = Signal(str)
 

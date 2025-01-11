@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project provides a module for strict type-checking signals PySide6.QtCore.Signal.
+This module provides type-checking for PySide6.QtCore.Signal.
 
 When imported, it will automatically patch the Signal class to enforce type checking on signal emissions.
 
@@ -10,17 +10,8 @@ This module requires the signal to be emitted from a method of a QObject subclas
 
 ## Installation
 
-```
+```bash
 pip install git+https://github.com/Loubrains/StrictSignal
-```
-
-## Requirements
-
-- PySide6
-- executing
-
-```
-pip install -r requirements.txt
 ```
 
 ## Usage
@@ -36,6 +27,9 @@ class MyObject(QObject):
 ## Example
 
 ```python
+from StritSignal import Signal
+from PySide6.QtCore import QObject
+
 class MyObject(QObject):
     signal = Signal(str)
 
