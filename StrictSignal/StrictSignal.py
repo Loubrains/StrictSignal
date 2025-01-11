@@ -10,7 +10,10 @@ signals_map = defaultdict(dict)
 
 
 def make_signal(*args: Type) -> _Signal:
-    """Collect signal type args and save it into a map"""
+    """Create a new Signal.
+
+    args are stored with the signal name for type-checking upon signal emissions.
+    """
     frame = inspect.currentframe().f_back
 
     node = executing.Source.executing(frame).node.parent
@@ -31,6 +34,10 @@ old_emit = SignalInstance.emit
 
 
 def new_emit(self, *args, **kwargs):
+    """Method used to override SignalInstance.emit to enforce type checking on signal emissions.
+
+    args are retrieved with the signal name and checked against the arguments passed to emit.
+    """
     frame = inspect.currentframe().f_back
 
     node = executing.Source.executing(frame).node
@@ -39,6 +46,7 @@ def new_emit(self, *args, **kwargs):
     clz = inspect.getargvalues(frame).locals["__class__"]
     types = signals_map[(clz.__module__, clz.__qualname__)][signal_name]
 
+    # Type-checking
     for arg, type in zip(args, types):
         if not isinstance(arg, type):
             raise TypeError(f"{arg} is not instance of {type}")

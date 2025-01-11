@@ -1,6 +1,6 @@
 """This module provides a type-checking signal implementation for PySide6.QtCore.Signal.
 
-When imported, it will automatically patch the Signal class to enforce type checking on signal emissions.
+When imported, it will automatically patch the Signal class and override the emit method to enforce type checking on signal emissions.
 
 This module requires the signal to be emitted from a method of a QObject subclass.
 
