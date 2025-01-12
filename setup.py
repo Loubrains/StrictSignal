@@ -4,8 +4,8 @@ setup(
     name="StrictSignal",
     version="0.1.0",
     install_requires=[
-        "PySide6",
-        "executing",
+        "executing>=2.1.0",
+        "PySide6>=6.8.1.1",
     ],
     author="Louie Atkins-Turkish",
     author_email="louie.atk@gmail.com",
