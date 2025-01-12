@@ -1,10 +1,10 @@
-from typing import Type
-
+import ast
 import inspect
 from collections import defaultdict
+from typing import Type
 
 import executing
-from PySide6.QtCore import Signal as _Signal, SignalInstance
+from PySide6.QtCore import QObject, Signal as _Signal, SignalInstance
 
 signals_map = defaultdict(dict)
 
@@ -38,12 +38,22 @@ def new_emit(self, *args, **kwargs):
 
     args are retrieved with the signal name and checked against the arguments passed to emit.
     """
+    signal_name = repr(self).split(" ")[1].split("(")[0]
+
     frame = inspect.currentframe().f_back
+    locals = inspect.getargvalues(frame).locals
 
     node = executing.Source.executing(frame).node
-    signal_name = node.func.value.attr
+    match node.func.value:
+        case ast.Attribute():
+            obj_name = node.func.value.value.id
+            clz = locals[obj_name].__class__
+        case _:
+            for o in locals.values():
+                if isinstance(o, QObject) and getattr(o, signal_name, None) is self:
+                    clz = o.__class__
+                    break
 
-    clz = inspect.getargvalues(frame).locals["__class__"]
     types = signals_map[(clz.__module__, clz.__qualname__)][signal_name]
 
     # Type-checking

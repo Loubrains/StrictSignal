@@ -107,3 +107,41 @@ class NoDataTypeIncorrect(QObject):
 def test_no_data_type_incorrect(app: QCoreApplication):
     with pytest.raises(TypeError):
         test_instance = NoDataTypeIncorrect()
+
+
+class EmitOutsideClass(QObject):
+    signal = Signal(str)
+
+    def __init__(self):
+        super().__init__()
+        self.received = None
+        self.signal.connect(self.on_signal)
+
+    def on_signal(self, text: str):
+        self.received = text
+
+
+def test_emit_outside_class(app: QCoreApplication):
+    test_instance = EmitOutsideClass()
+    test_instance.signal.emit("Hello, world!")
+
+    assert type(test_instance.received) == str
+    assert test_instance.received == "Hello, world!"
+
+
+class EmitOutsideClassWrongType(QObject):
+    signal = Signal(str)
+
+    def __init__(self):
+        super().__init__()
+        self.received = None
+        self.signal.connect(self.on_signal)
+
+    def on_signal(self, text: str):
+        self.received = text
+
+
+def test_emit_outside_class_wrong_type(app: QCoreApplication):
+    test_instance = EmitOutsideClassWrongType()
+    with pytest.raises(TypeError):
+        test_instance.signal.emit(42)
