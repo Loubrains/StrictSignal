@@ -49,3 +49,12 @@ obj = MyObject()
 ## Contributing
 
 Contributions are welcome!
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 (GPLv3). See the [LICENSE](LICENSE) file for details.
+
+### Dependency Licenses
+
+- **PySide6**: Licensed under the LGPL v3. See [PySide6 License](https://doc.qt.io/qtforpython/licenses.html).
+- **executing**: Licensed under the Apache License 2.0. See [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
